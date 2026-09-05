@@ -5,16 +5,14 @@ from __future__ import annotations
 import json
 import os
 import re
-from pathlib import Path
 from urllib import request as urlrequest
 
 from flask import Flask, jsonify, render_template, request
 
+from health_core.knowledge import retrieve_knowledge
 from health_core.safety import assess_risk
 
 
-BASE_DIR = Path(__file__).resolve().parent
-KNOWLEDGE_PATH = BASE_DIR / "data" / "health_knowledge.json"
 REQUIRED_FIELDS = (
     "answer",
     "attention",
@@ -41,17 +39,19 @@ def is_high_risk_question(question: str) -> bool:
     return assess_risk(question)["level"] in {"red", "yellow"}
 
 
-def _load_knowledge() -> list[dict]:
-    try:
-        return json.loads(KNOWLEDGE_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return []
-
-
 def _find_topic(question: str) -> dict:
-    for item in _load_knowledge():
-        if any(keyword in question for keyword in item.get("keywords", [])):
-            return item
+    matches = retrieve_knowledge(question, limit=1)
+    if matches:
+        item = matches[0]
+        urgent_signs = "、".join(item["urgent_signs"])
+        return {
+            "topic": item["topic"],
+            "answer": item["summary"],
+            "attention": list(item["attention"]),
+            "when_to_seek_care": f"如果出现{urgent_signs}，应及时就医；情况突然或严重时请立即寻求帮助。",
+            "visit_checklist": ["症状开始时间和变化记录", "正在使用的药物或药盒", "既往检查报告", "身份证和医保信息"],
+            "doctor_questions": ["这个情况需要做哪些检查？", "日常生活中最需要注意什么？", "出现什么表现需要尽快复诊？"],
+        }
     return {
         "answer": "健康问题需要结合年龄、既往病史和检查结果判断。先把不舒服的部位、持续时间和变化记下来，再向医生说明。",
         "attention": [

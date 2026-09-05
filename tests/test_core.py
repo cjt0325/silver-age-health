@@ -1,4 +1,5 @@
 from app import (
+    _prompt,
     build_demo_response,
     is_high_risk_question,
     model_config_status,
@@ -44,3 +45,10 @@ def test_model_config_status_never_contains_the_key(monkeypatch):
     assert status["has_api_key"] is True
     assert status["model"] == "qwen-plus"
     assert "test-secret" not in str(status)
+
+
+def test_live_prompt_serializes_the_new_knowledge_shape():
+    prompt = _prompt("高血压平时要注意什么？")
+
+    assert "血压健康管理" in prompt
+    assert "只返回 JSON" in prompt
