@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>银龄健康通</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">AI 健康教育与就医协同</p>
+        <h1>银龄健康通</h1>
+        <p class="hero-copy">有健康问题，可以说出来，也可以打字问我。</p>
+      </header>
+
+      <section class="panel question-panel" aria-labelledby="question-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">第一步</p>
+            <h2 id="question-title">说说您想了解什么</h2>
+          </div>
+          <span id="speech-status" class="status-pill">语音功能准备中</span>
+        </div>
+        <label class="sr-only" for="question">健康问题</label>
+        <textarea id="question" rows="3" maxlength="200" placeholder="例如：高血压平时要注意什么？"></textarea>
+        <div class="action-row">
+          <button id="voice-button" class="button button-secondary" type="button">🎙 开始说话</button>
+          <button id="ask-button" class="button button-primary" type="button">✨ 帮我讲明白</button>
+        </div>
+        <p id="voice-hint" class="hint">您也可以直接在上面输入问题。</p>
+        <div class="examples" aria-label="示例问题">
+          <span>可以试试：</span>
+          <button type="button" data-question="高血压平时要注意什么？">高血压怎么注意</button>
+          <button type="button" data-question="感冒发热需要准备什么？">感冒发热怎么办</button>
+          <button type="button" data-question="去医院复诊要带什么？">复诊要带什么</button>
+        </div>
+      </section>
+
+      <section id="result" class="result-stack" hidden aria-live="polite">
+        <div class="panel answer-panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">第二步</p>
+              <h2>我这样讲，您看明白了吗？</h2>
+            </div>
+            <button id="read-button" class="button button-small" type="button">🔊 朗读回答</button>
+          </div>
+          <p id="answer" class="answer-text"></p>
+          <div class="notice notice-blue">
+            <strong>平时注意</strong>
+            <ul id="attention"></ul>
+          </div>
+          <div class="notice notice-yellow">
+            <strong>什么时候要去医院</strong>
+            <p id="when-to-seek-care"></p>
+          </div>
+        </div>
+
+        <div class="two-columns">
+          <div class="panel checklist-panel">
+            <p class="section-kicker">第三步</p>
+            <h2>就医准备清单</h2>
+            <ul id="visit-checklist"></ul>
+          </div>
+          <div class="panel checklist-panel">
+            <p class="section-kicker">问诊更从容</p>
+            <h2>可以问医生</h2>
+            <ul id="doctor-questions"></ul>
+          </div>
+        </div>
+
+        <div class="panel family-panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">告诉家人</p>
+              <h2>家属提醒</h2>
+            </div>
+            <button id="copy-button" class="button button-small" type="button">复制提醒</button>
+          </div>
+          <p id="family-message" class="family-message"></p>
+          <p id="copy-status" class="hint" role="status"></p>
+        </div>
+
+        <p id="safety-note" class="safety-note"></p>
+        <p id="mode-note" class="mode-note"></p>
+      </section>
+
+      <footer>银龄健康通 · 健康科普不能替代医生诊断</footer>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

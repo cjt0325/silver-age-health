@@ -1,0 +1,79 @@
+:root {
+  --ink: #16324f;
+  --muted: #536b7f;
+  --blue: #1464a5;
+  --blue-dark: #0b4779;
+  --blue-soft: #eaf4fc;
+  --yellow-soft: #fff7d8;
+  --yellow-border: #d9a500;
+  --surface: #ffffff;
+  --background: #f3f8fc;
+  --border: #c8d7e4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--background);
+  font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+button, textarea { font: inherit; }
+
+button { cursor: pointer; }
+
+button:focus-visible, textarea:focus-visible {
+  outline: 4px solid #f5b700;
+  outline-offset: 3px;
+}
+
+.page-shell { width: min(100% - 32px, 980px); margin: 0 auto; padding: 30px 0 45px; }
+.hero { padding: 16px 8px 24px; }
+.eyebrow, .section-kicker { margin: 0; color: var(--blue); font-weight: 700; letter-spacing: .08em; }
+h1, h2 { line-height: 1.25; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.7rem); margin-top: 4px; }
+h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); }
+.hero-copy { margin: 10px 0 0; color: var(--muted); font-size: 1.15rem; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: clamp(22px, 4vw, 36px); box-shadow: 0 8px 24px rgba(22, 50, 79, .06); }
+.section-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.section-kicker { font-size: .88rem; line-height: 1.2; margin-bottom: 5px; }
+textarea { width: 100%; border: 2px solid #9db4c7; border-radius: 14px; padding: 16px; color: var(--ink); background: #fbfdff; resize: vertical; min-height: 116px; }
+textarea::placeholder { color: #6b8294; }
+.action-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+.button { border: 0; border-radius: 12px; padding: 12px 20px; min-height: 54px; font-weight: 700; transition: transform .12s ease, background .12s ease; }
+.button:hover { transform: translateY(-1px); }
+.button-primary { color: white; background: var(--blue); }
+.button-primary:hover { background: var(--blue-dark); }
+.button-secondary, .button-small { color: var(--blue-dark); background: #e4f0f8; border: 1px solid #b8d0e1; }
+.button-small { min-height: 44px; padding: 8px 14px; font-size: .92rem; }
+.hint, .mode-note { color: var(--muted); font-size: .9rem; margin: 10px 0 0; }
+.status-pill { white-space: nowrap; border-radius: 99px; padding: 4px 12px; color: #356079; background: #eef4f7; font-size: .78rem; }
+.status-pill.ready { color: #14663a; background: #e6f6ec; }
+.status-pill.listening { color: #8a3d00; background: #fff0dc; }
+.examples { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 18px; color: var(--muted); font-size: .9rem; }
+.examples button { border: 0; border-bottom: 2px solid #a5c9e1; color: var(--blue-dark); background: transparent; padding: 1px 3px; }
+.result-stack { display: grid; gap: 18px; margin-top: 20px; }
+.answer-text { font-size: 1.15rem; margin: 0 0 20px; }
+.notice { border-left: 6px solid; border-radius: 10px; padding: 13px 18px; margin-top: 14px; }
+.notice p { margin: 4px 0 0; }
+.notice ul, .checklist-panel ul { margin: 8px 0 0; padding-left: 1.5em; }
+.notice-blue { background: var(--blue-soft); border-color: var(--blue); }
+.notice-yellow { background: var(--yellow-soft); border-color: var(--yellow-border); }
+.two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.checklist-panel li { margin: 7px 0; }
+.family-message { background: #f5f9fc; border: 1px dashed #9bb5c8; border-radius: 12px; padding: 15px; margin: 0; }
+.safety-note { margin: 0; border-radius: 12px; padding: 13px 16px; color: #6a4100; background: #fff8e6; border: 1px solid #e8c46b; }
+footer { color: var(--muted); text-align: center; font-size: .82rem; padding: 24px 0 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 800px) {
+  .page-shell { width: min(100% - 20px, 680px); padding-top: 18px; }
+  .two-columns { grid-template-columns: 1fr; }
+  .section-heading { flex-direction: column; }
+  .button { flex: 1 1 220px; }
+  .button-small { flex: 0 1 auto; }
+}
