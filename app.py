@@ -10,6 +10,8 @@ from urllib import request as urlrequest
 
 from flask import Flask, jsonify, render_template, request
 
+from health_core.safety import assess_risk
+
 
 BASE_DIR = Path(__file__).resolve().parent
 KNOWLEDGE_PATH = BASE_DIR / "data" / "health_knowledge.json"
@@ -22,19 +24,6 @@ REQUIRED_FIELDS = (
     "family_message",
     "safety_note",
 )
-HIGH_RISK_TERMS = (
-    "诊断",
-    "改药",
-    "停药",
-    "药停",
-    "药量",
-    "急救",
-    "胸痛",
-    "呼吸困难",
-    "意识不清",
-    "不去医院",
-)
-
 app = Flask(__name__)
 LAST_MODEL_ERROR = None
 
@@ -49,7 +38,7 @@ def validate_question(question: str) -> str | None:
 
 
 def is_high_risk_question(question: str) -> bool:
-    return any(term in question for term in HIGH_RISK_TERMS)
+    return assess_risk(question)["level"] in {"red", "yellow"}
 
 
 def _load_knowledge() -> list[dict]:
