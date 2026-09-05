@@ -36,6 +36,7 @@ HIGH_RISK_TERMS = (
 )
 
 app = Flask(__name__)
+LAST_MODEL_ERROR = None
 
 
 def validate_question(question: str) -> str | None:
@@ -134,6 +135,17 @@ def _call_model(question: str) -> dict:
     return result
 
 
+def model_config_status() -> dict:
+    """Return safe local diagnostics without exposing the API key."""
+    return {
+        "has_api_key": bool(os.getenv("OPENAI_API_KEY", "").strip()),
+        "base_url": os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/"),
+        "model": os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+        "app_mode": os.getenv("APP_MODE", "auto"),
+        "last_error": LAST_MODEL_ERROR,
+    }
+
+
 def _normalize_response(result: dict, question: str, mode: str) -> dict:
     fallback = build_demo_response(question)
     normalized = {}
@@ -151,6 +163,7 @@ def _normalize_response(result: dict, question: str, mode: str) -> dict:
 
 
 def prepare_response(question: str, mode: str | None = None) -> dict:
+    global LAST_MODEL_ERROR
     error = validate_question(question)
     if error:
         raise ValueError(error)
@@ -159,8 +172,15 @@ def prepare_response(question: str, mode: str | None = None) -> dict:
     if requested_mode == "demo" or (requested_mode == "auto" and not os.getenv("OPENAI_API_KEY", "").strip()):
         return build_demo_response(clean_question)
     try:
-        return _normalize_response(_call_model(clean_question), clean_question, "live")
-    except Exception:
+        response = _normalize_response(_call_model(clean_question), clean_question, "live")
+        LAST_MODEL_ERROR = None
+        return response
+    except Exception as exc:
+        api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        safe_error = str(exc)
+        if api_key:
+            safe_error = safe_error.replace(api_key, "[hidden]")
+        LAST_MODEL_ERROR = f"{type(exc).__name__}: {safe_error}"
         fallback = build_demo_response(clean_question)
         fallback["safety_note"] += " 当前模型服务不可用，页面展示的是演示内容。"
         return fallback
@@ -174,6 +194,11 @@ def index():
 @app.get("/api/health")
 def health():
     return jsonify({"status": "ok"})
+
+
+@app.get("/api/config-status")
+def config_status():
+    return jsonify(model_config_status())
 
 
 @app.post("/api/ask")

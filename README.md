@@ -42,6 +42,14 @@ $env:OPENAI_MODEL = "gpt-4o-mini"
 .venv\Scripts\python.exe app.py
 ```
 
+如果不想分开设置环境变量，可直接运行项目自带的安全启动脚本。脚本会在本机隐藏输入密钥，并在同一个进程内启动实时模型：
+
+```powershell
+.\start_live.ps1
+```
+
+启动后打开 <http://127.0.0.1:5000/api/config-status>，可以查看是否读到密钥、接口地址、模型名和最近一次失败原因；这里不会显示密钥。
+
 ## 推荐演示问题
 
 1. 高血压平时要注意什么？

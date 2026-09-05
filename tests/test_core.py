@@ -1,6 +1,7 @@
 from app import (
     build_demo_response,
     is_high_risk_question,
+    model_config_status,
     prepare_response,
     validate_question,
 )
@@ -34,3 +35,12 @@ def test_prepare_response_keeps_required_shape():
         "safety_note",
         "mode",
     }
+
+
+def test_model_config_status_never_contains_the_key(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test-secret")
+    monkeypatch.setenv("OPENAI_MODEL", "qwen-plus")
+    status = model_config_status()
+    assert status["has_api_key"] is True
+    assert status["model"] == "qwen-plus"
+    assert "test-secret" not in str(status)
