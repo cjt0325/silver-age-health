@@ -7,6 +7,7 @@ import os
 from flask import Flask, jsonify, render_template, request
 
 from health_core.knowledge import retrieve_knowledge
+from health_core.evaluation import load_evaluation_report
 from health_core.model import call_chat_model
 from health_core.response import (
     build_prompt,
@@ -76,6 +77,11 @@ def health():
 @app.get("/api/config-status")
 def config_status():
     return jsonify(model_config_status())
+
+
+@app.get("/api/evaluation-summary")
+def evaluation_summary():
+    return jsonify(load_evaluation_report())
 
 
 @app.post("/api/ask")

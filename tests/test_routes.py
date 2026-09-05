@@ -38,3 +38,10 @@ def test_ask_route_returns_new_contract():
 
     assert response.status_code == 200
     assert {"risk", "sources", "trace", "follow_up_available"} <= response.json.keys()
+
+
+def test_evaluation_summary_route_has_stable_contract():
+    response = app.test_client().get("/api/evaluation-summary")
+
+    assert response.status_code == 200
+    assert {"status", "case_count", "metrics", "categories", "cases"} <= response.json.keys()

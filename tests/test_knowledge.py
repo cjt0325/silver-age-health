@@ -30,6 +30,12 @@ def test_duplicate_source_is_shown_once():
     assert len({source["url"] for source in sources}) == len(sources)
 
 
+def test_colloquial_medication_change_still_retrieves_rational_use_source():
+    matches = retrieve_knowledge("医生不在时我能自己改药吗？")
+
+    assert matches[0]["topic"] == "老年合理用药"
+
+
 def test_untrusted_source_is_rejected(tmp_path):
     path = tmp_path / "knowledge.json"
     path.write_text(
