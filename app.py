@@ -15,6 +15,7 @@ from health_core.response import (
     validate_question,
 )
 from health_core.safety import assess_risk
+from health_core.visit_pack import build_visit_pack
 
 
 app = Flask(__name__)
@@ -80,6 +81,19 @@ def ask():
     if error:
         return jsonify({"error": error}), 400
     return jsonify(prepare_response(question, body.get("mode")))
+
+
+@app.post("/api/visit-pack")
+def visit_pack():
+    body = request.get_json(silent=True) or {}
+    question = body.get("question", "")
+    details = body.get("details", {})
+    error = validate_question(question)
+    if error:
+        return jsonify({"error": error}), 400
+    if not isinstance(details, dict):
+        return jsonify({"error": "补充信息格式不正确，请刷新页面后重试。"}), 400
+    return jsonify(build_visit_pack(question, details))
 
 
 if __name__ == "__main__":
