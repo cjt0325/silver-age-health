@@ -2,5 +2,13 @@
 
 from .safety import assess_risk, enforce_safety
 from .knowledge import public_sources, retrieve_knowledge
+from .response import prepare_response, validate_question
 
-__all__ = ["assess_risk", "enforce_safety", "public_sources", "retrieve_knowledge"]
+__all__ = [
+    "assess_risk",
+    "enforce_safety",
+    "prepare_response",
+    "public_sources",
+    "retrieve_knowledge",
+    "validate_question",
+]
