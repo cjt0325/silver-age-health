@@ -63,6 +63,11 @@ def index():
     return render_template("index.html")
 
 
+@app.get("/evaluation")
+def evaluation_page():
+    return render_template("evaluation.html")
+
+
 @app.get("/api/health")
 def health():
     return jsonify({"status": "ok"})

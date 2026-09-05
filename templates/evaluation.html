@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>银龄健康通 · 技术看板</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="dashboard-shell">
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">竞赛技术证据</p>
+          <h1>可信就医导航看板</h1>
+          <p class="hero-copy">展示系统安全、来源、降级和固定评测证据，不展示任何密钥或个人健康资料。</p>
+        </div>
+        <a class="button button-secondary back-link" href="/">返回老人端</a>
+      </header>
+
+      <section class="panel dashboard-section" aria-labelledby="status-title">
+        <p class="section-kicker">当前运行状态</p>
+        <h2 id="status-title">模型与安全边界</h2>
+        <div id="system-status" class="system-status" aria-live="polite">
+          <p>正在读取本机安全状态…</p>
+        </div>
+      </section>
+
+      <section class="dashboard-section" aria-labelledby="metric-title">
+        <p class="section-kicker">固定虚构用例</p>
+        <h2 id="metric-title">可复现评测结果</h2>
+        <p id="evaluation-meta" class="hint">正在读取评测报告…</p>
+        <div id="metric-grid" class="metric-grid"></div>
+      </section>
+
+      <section class="panel dashboard-section" aria-labelledby="category-title">
+        <p class="section-kicker">分场景检查</p>
+        <h2 id="category-title">测试覆盖</h2>
+        <div class="table-wrap">
+          <table id="category-table">
+            <thead><tr><th>类别</th><th>通过</th><th>总数</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel boundary-panel">
+        <p class="section-kicker">能力边界</p>
+        <h2>我们刻意不做什么</h2>
+        <ul>
+          <li>不诊断疾病，不判断患病概率。</li>
+          <li>不建议停药、换药、加量或减量。</li>
+          <li>不保存姓名、身份证号、病历号或长期健康档案。</li>
+          <li>不把工程评测结果包装成医学准确率。</li>
+        </ul>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='evaluation.js') }}"></script>
+  </body>
+</html>
