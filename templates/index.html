@@ -9,9 +9,12 @@
   <body>
     <main class="page-shell">
       <header class="hero">
-        <p class="eyebrow">AI 健康教育与就医协同</p>
-        <h1>银龄健康通</h1>
-        <p class="hero-copy">有健康问题，可以说出来，也可以打字问我。</p>
+        <div>
+          <p class="eyebrow">AI 健康教育与就医协同</p>
+          <h1>银龄健康通</h1>
+          <p class="hero-copy">有健康问题，可以说出来，也可以打字问我。</p>
+        </div>
+        <a class="technical-link" href="/evaluation">查看系统依据</a>
       </header>
 
       <section class="panel question-panel" aria-labelledby="question-title">
@@ -23,21 +26,29 @@
           <span id="speech-status" class="status-pill">语音功能准备中</span>
         </div>
         <label class="sr-only" for="question">健康问题</label>
-        <textarea id="question" rows="3" maxlength="200" placeholder="例如：高血压平时要注意什么？"></textarea>
+        <textarea id="question" rows="3" maxlength="200" placeholder="例如：老年人平时怎样预防跌倒？"></textarea>
         <div class="action-row">
           <button id="voice-button" class="button button-secondary" type="button">🎙 开始说话</button>
           <button id="ask-button" class="button button-primary" type="button">✨ 帮我讲明白</button>
         </div>
-        <p id="voice-hint" class="hint">您也可以直接在上面输入问题。</p>
+        <p id="voice-hint" class="hint" aria-live="polite">您也可以直接在上面输入问题。</p>
         <div class="examples" aria-label="示例问题">
           <span>可以试试：</span>
-          <button type="button" data-question="高血压平时要注意什么？">高血压怎么注意</button>
-          <button type="button" data-question="感冒发热需要准备什么？">感冒发热怎么办</button>
-          <button type="button" data-question="去医院复诊要带什么？">复诊要带什么</button>
+          <button type="button" data-question="老年人平时怎样预防跌倒？">怎样预防跌倒</button>
+          <button type="button" data-question="降压药能不能停掉一半？">降压药能停吗</button>
+          <button type="button" data-question="老人突然胸痛而且呼吸困难怎么办？">胸痛呼吸困难</button>
         </div>
       </section>
 
       <section id="result" class="result-stack" hidden aria-live="polite">
+        <div id="risk-banner" class="risk-banner" role="alert" aria-live="assertive">
+          <div class="risk-icon" aria-hidden="true">✓</div>
+          <div>
+            <p id="risk-label" class="risk-label"></p>
+            <p id="risk-action" class="risk-action"></p>
+          </div>
+        </div>
+
         <div class="panel answer-panel">
           <div class="section-heading">
             <div>
@@ -69,6 +80,70 @@
             <ul id="doctor-questions"></ul>
           </div>
         </div>
+
+        <section class="panel source-panel" aria-labelledby="source-title">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="section-kicker">内容从哪里来</p>
+              <h2 id="source-title">参考依据</h2>
+            </div>
+            <span class="trusted-badge">仅展示白名单来源</span>
+          </div>
+          <ul id="source-list" class="source-list"></ul>
+          <p id="source-empty" class="hint" hidden>当前问题没有匹配到权威资料，系统没有生成虚假引用。</p>
+          <div id="trace-summary" class="trace-summary"></div>
+        </section>
+
+        <section id="visit-pack-panel" class="panel visit-pack-panel" aria-labelledby="visit-pack-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">可选服务</p>
+              <h2 id="visit-pack-title">生成我的问诊准备包</h2>
+              <p class="hint">再补充几项，就能把情况整理成一段话带给医生。</p>
+            </div>
+            <button id="visit-pack-button" class="button button-secondary" type="button" aria-expanded="false">填写补充信息</button>
+          </div>
+          <form id="visit-pack-form" hidden>
+            <p class="privacy-note">只在当前页面使用，请不要填写姓名、身份证号或病历号。</p>
+            <div class="form-grid">
+              <label>什么时候开始
+                <select id="detail-started">
+                  <option value="">不清楚或不填写</option>
+                  <option>今天</option>
+                  <option>1—3天</option>
+                  <option>一周以内</option>
+                  <option>一周以上</option>
+                </select>
+              </label>
+              <label>有没有变化
+                <select id="detail-change">
+                  <option value="">不清楚或不填写</option>
+                  <option>没有明显变化</option>
+                  <option>正在加重</option>
+                  <option>有所缓解</option>
+                  <option>反复出现</option>
+                </select>
+              </label>
+              <label>正在使用的药物或药盒
+                <input id="detail-medications" maxlength="80" placeholder="例如：带着降压药药盒" />
+              </label>
+              <label>已有基础疾病
+                <input id="detail-conditions" maxlength="80" placeholder="例如：高血压" />
+              </label>
+            </div>
+            <button class="button button-primary" type="submit">生成准备包</button>
+          </form>
+          <div id="visit-pack-result" class="visit-pack-result" hidden aria-live="polite">
+            <h3>给医生的情况摘要</h3>
+            <p id="pack-summary" class="summary-box"></p>
+            <div class="pack-grid">
+              <div><h3>要带的材料</h3><ul id="pack-materials"></ul></div>
+              <div><h3>优先问医生</h3><ul id="pack-questions"></ul></div>
+              <div><h3>家属可以帮忙</h3><ul id="pack-family-tasks"></ul></div>
+            </div>
+            <p id="pack-privacy-note" class="hint"></p>
+          </div>
+        </section>
 
         <div class="panel family-panel">
           <div class="section-heading">

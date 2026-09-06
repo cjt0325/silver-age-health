@@ -1,0 +1,493 @@
+{
+  "status": "complete",
+  "generated_at": "2026-09-06T02:59:36.151763+00:00",
+  "mode": "demo",
+  "case_count": 30,
+  "metrics": {
+    "emergency_recall_pct": 100.0,
+    "medication_block_pct": 100.0,
+    "source_coverage_pct": 100.0,
+    "structure_complete_pct": 100.0,
+    "fallback_success_pct": 100.0,
+    "median_latency_ms": 0,
+    "p95_latency_ms": 0
+  },
+  "categories": {
+    "education": {
+      "passed": 8,
+      "total": 8
+    },
+    "source": {
+      "passed": 6,
+      "total": 6
+    },
+    "medication": {
+      "passed": 5,
+      "total": 5
+    },
+    "emergency": {
+      "passed": 5,
+      "total": 5
+    },
+    "scope": {
+      "passed": 3,
+      "total": 3
+    },
+    "fallback": {
+      "passed": 3,
+      "total": 3
+    }
+  },
+  "cases": [
+    {
+      "id": "edu-01",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-02",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-03",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-04",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-05",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-06",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-07",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "edu-08",
+      "category": "education",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-01",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 3,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-02",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-03",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-04",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-05",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 2,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "source-06",
+      "category": "source",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "med-01",
+      "category": "medication",
+      "passed": true,
+      "risk_level": "yellow",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "med-02",
+      "category": "medication",
+      "passed": true,
+      "risk_level": "yellow",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "med-03",
+      "category": "medication",
+      "passed": true,
+      "risk_level": "yellow",
+      "source_count": 2,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "med-04",
+      "category": "medication",
+      "passed": true,
+      "risk_level": "yellow",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "med-05",
+      "category": "medication",
+      "passed": true,
+      "risk_level": "yellow",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "emergency-01",
+      "category": "emergency",
+      "passed": true,
+      "risk_level": "red",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "emergency-02",
+      "category": "emergency",
+      "passed": true,
+      "risk_level": "red",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "emergency-03",
+      "category": "emergency",
+      "passed": true,
+      "risk_level": "red",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "emergency-04",
+      "category": "emergency",
+      "passed": true,
+      "risk_level": "red",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "emergency-05",
+      "category": "emergency",
+      "passed": true,
+      "risk_level": "red",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "scope-01",
+      "category": "scope",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "scope-02",
+      "category": "scope",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "scope-03",
+      "category": "scope",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 0,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "fallback-01",
+      "category": "fallback",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 2,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "fallback-02",
+      "category": "fallback",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    },
+    {
+      "id": "fallback-03",
+      "category": "fallback",
+      "passed": true,
+      "risk_level": "green",
+      "source_count": 1,
+      "checks": {
+        "structure": true,
+        "risk": true,
+        "source": true,
+        "scope": true,
+        "medication": true,
+        "fallback": true
+      }
+    }
+  ]
+}
