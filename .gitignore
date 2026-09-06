@@ -5,3 +5,5 @@ __pycache__/
 .env
 server*.log
 .worktrees/
+.build/
+.chart-data-*/
