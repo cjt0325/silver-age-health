@@ -82,6 +82,7 @@ function renderResponse(data) {
     demo: '当前使用本地安全内容，适合无网络答辩演示。',
     live: '当前使用千问大模型，并经过本地安全规则复核。',
     safety: '当前由本地紧急安全规则直接处理，未调用大模型。',
+    scope: '当前问题不在服务范围内，系统未调用大模型。',
   };
   document.querySelector('#mode-note').textContent = modeMessages[data.mode] || '当前响应模式未知。';
   setList('#attention', data.attention);

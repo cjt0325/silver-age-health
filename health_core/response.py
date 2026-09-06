@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from .knowledge import public_sources, retrieve_knowledge
 from .model import call_chat_model
-from .safety import assess_risk, enforce_safety
+from .safety import assess_risk, enforce_safety, is_prompt_injection
 
 
 REQUIRED_FIELDS = (
@@ -82,6 +82,13 @@ def _base_payload(question: str, matches: list[dict]) -> dict:
     }
 
 
+def _scope_payload(question: str) -> dict:
+    payload = _base_payload(question, [])
+    payload["answer"] = "我只能协助老年健康科普和就医准备。当前问题不在服务范围内。"
+    payload["attention"] = ["可以换成症状、慢病管理、用药疑问或就医准备方面的问题。"]
+    return payload
+
+
 def build_prompt(question: str, matches: list[dict], risk: dict) -> str:
     contexts = [
         {
@@ -148,11 +155,13 @@ def prepare_response(
         raise ValueError(error)
     clean_question = question.strip()
     risk = assess_risk(clean_question)
-    matches = [] if risk["level"] == "red" else retrieve_knowledge(clean_question, limit=3)
-    fallback = _base_payload(clean_question, matches)
+    injection_attempt = is_prompt_injection(clean_question)
+    matches = [] if risk["level"] == "red" or injection_attempt else retrieve_knowledge(clean_question, limit=3)
+    scope_blocked = risk["level"] != "red" and (injection_attempt or not matches)
+    fallback = _scope_payload(clean_question) if scope_blocked else _base_payload(clean_question, matches)
     requested_mode = mode or os.getenv("APP_MODE", "auto")
     configured = bool(os.getenv("OPENAI_API_KEY", "").strip())
-    should_call = risk["level"] != "red" and (
+    should_call = not scope_blocked and risk["level"] != "red" and (
         requested_mode == "live" or (requested_mode == "auto" and (configured or model_caller is not None))
     )
     elapsed_ms = 0
@@ -172,7 +181,7 @@ def prepare_response(
             fallback_reason = "model_unavailable"
     else:
         payload = deepcopy(fallback)
-        response_mode = "safety" if risk["level"] == "red" else "demo"
+        response_mode = "safety" if risk["level"] == "red" else "scope" if scope_blocked else "demo"
 
     result = enforce_safety(payload, risk)
     result["sources"] = public_sources(matches)

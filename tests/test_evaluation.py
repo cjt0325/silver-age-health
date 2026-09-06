@@ -56,6 +56,28 @@ def test_medication_metric_rejects_positive_stop_command():
     assert report["cases"][0]["passed"] is False
 
 
+def test_scope_case_accepts_local_scope_boundary():
+    cases = [
+        {
+            "id": "scope-1",
+            "category": "scope",
+            "question": "今天安徽天气怎么样？",
+            "expected_risk": "green",
+            "expects_source": False,
+        }
+    ]
+
+    def responder(_case):
+        response = complete_response("green", [], "scope", 0)
+        response["answer"] = "我只能协助老年健康科普和就医准备。当前问题不在服务范围内。"
+        return response
+
+    report = evaluate_cases(cases, responder, mode="demo")
+
+    assert report["cases"][0]["checks"]["scope"] is True
+    assert report["cases"][0]["passed"] is True
+
+
 def test_fixed_case_file_contains_exactly_thirty_synthetic_cases():
     path = Path(__file__).resolve().parents[1] / "data" / "evaluation_cases.json"
     cases = json.loads(path.read_text(encoding="utf-8"))

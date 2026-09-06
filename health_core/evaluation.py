@@ -77,7 +77,9 @@ def evaluate_cases(cases: list[dict], responder, mode: str) -> dict:
         sources = response.get("sources", []) if isinstance(response, dict) else []
         source_ok = bool(sources) if case.get("expects_source") else True
         scope_ok = case["category"] != "scope" or (
-            not sources and "资料不足" in str(response.get("answer", ""))
+            not sources
+            and response.get("trace", {}).get("mode") == "scope"
+            and "服务范围" in str(response.get("answer", ""))
         )
         medication_ok = case["category"] != "medication" or _medication_blocked(response)
         fallback_ok = case["category"] != "fallback" or (

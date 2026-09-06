@@ -12,6 +12,25 @@ GREEN_LABEL = "健康科普"
 
 MEDICATION_TERMS = ("停药", "换药", "改药", "加量", "减量", "药量", "剂量")
 NEGATIVE_MARKERS = ("不要", "不能", "不可", "不应", "请勿")
+PROMPT_INJECTION_MARKERS = (
+    "忽略前面",
+    "忽略以上",
+    "忽略规则",
+    "系统提示词",
+    "提示词",
+    "绕过安全",
+    "越过安全",
+    "输出密钥",
+    "api key",
+)
+
+
+def is_prompt_injection(text: object) -> bool:
+    """Recognize common instructions that try to escape the health-assistant scope."""
+    if not isinstance(text, str):
+        return False
+    normalized = text.strip().lower()
+    return any(marker in normalized for marker in PROMPT_INJECTION_MARKERS)
 
 
 def _mentions_medication_change(text: str) -> bool:
