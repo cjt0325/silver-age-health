@@ -35,6 +35,8 @@ python -m venv .venv
 .\start_live.ps1
 ```
 
+`.env.example` 仅用于核对配置字段，不会被程序自动读取。不要把真实密钥复制到 `.env` 或其他项目文件；需要实时模型时，始终使用上面的安全启动脚本。
+
 默认配置：
 
 - 接口：`https://dashscope.aliyuncs.com/compatible-mode/v1`
