@@ -7,3 +7,4 @@ server*.log
 .worktrees/
 .build/
 .chart-data-*/
+submission/*提交包.zip
